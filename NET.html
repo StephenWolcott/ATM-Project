@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>NET Pay Program</h1>
+    <p>Simple NET pay calculator. It takes your GROSS pay and then deducts Federal, State, FICA. It has the option to deduct any additional amount from your check. It then displays your NET pay.</p>
+    <!-- FED 15% -->
+    <!-- STATE 5% -->
+    <!-- FICA 7.62% -->
+    <!-- IF ANY ADITIONAL -->
+    <ol>
+        <li>START</li>
+        <li>DISPLAY "What is your GROSS pay per year?"</li>
+        <li>INPUT GROSS pay</li>
+        <li>FOR FEDERAL = GROSS * .15</li>
+        <li>FOR STATE = GROSS * .05</li>
+        <li>FOR FICA = GROSS * .0762</li>
+        <li>DECLARE GROSS - (FEDERAL + STATE + FICA) = NET1</li>
+        <li>DISPLAY "Do you have any additional withholdings?"</li>
+        <li>INPUT ADDITIONALWITHHOLDING</li>
+        <li>DECLARE NET1 - AdditionalWithholding = NET2 </li>
+        <li>DISPLAY "NET2 is your NET pay!"</li>
+        <li>END </li>
+    </ol>
+    
+    <p>What is your gross pay?</p>
+        <input type="text" id="grossPay">
+        <p>Additional Withholdings?</p>
+        <input type="text" id="additionalWithholding">
+        <button type="submit" onclick="netPay()">Submit</button>
+        <span id="submit"></span>
+
+    </form>
+
+    <script>
+        function netPay(){
+            var grossPay = document.getElementById("grossPay").value;
+            var fed = .15;
+            var state = .05;
+            var fica = .0762
+            var additionalWithholding = document.getElementById("additionalWithholding").value;
+            var submit = document.getElementById("submit");
+
+            submit.innerHTML = (grossPay - ((fed + state + fica) * grossPay - additionalWithholding));
+            
+            
+        }
+    </script>
+
+    <h1>PTO v1.0</h1>
+    <p>A simple program that calculates the PTO(Paid time off) for 1yr at a fixed rate of 5hrs per paycheck paid bi-weekly.</p>
+    <ol>
+        <li>START</li>
+        <li>SET INT hrsPerPaycheck</li>
+        <li>SET INT paychecksPerYear</li>
+        <li>SET INT totalHrsPerYear = hrsPerPaycheck * paychecksPerYear</li>
+        <li>DISPLAY "you get" totalHrsPerYear "hours of paid time off for 1 year"</li>
+        <li>END</li>
+    </ol>
+
+        <p>Paid time off in a year</p>
+        <button onclick="pto1()">Find Out!</button>
+        <br>
+        <span id="display1"></span>
+
+        <script>
+            function pto1(){
+                var hrsPerPaycheck = 5;
+                var paychecksPerYear = 26;
+                var totalHrsPerYear = hrsPerPaycheck * paychecksPerYear;
+                var display = document.getElementById("display1");
+            
+                display.innerHTML = ("You get " + totalHrsPerYear + " Hours of paid time off for 1 year");
+            }
+        </script>
+
+
+    <h1>PTO v.2.0</h1>
+    <p>A simple program that calculates the PTO(Paid time off) for the corresponding amount of time the employee has work in years. Returns amount of PTO in weeks.</p>
+    <ol>
+        <li>START</li>
+        <li>SET INT HrsPerPaycheck</li>
+        <li>SET INT PaychecksPerYear</li>
+        <li>DISPLAY "how many years have you worked?</li>
+        <li>INPUT YearsWorked</li>
+        <li>if YearsWorked less than 5 HrsPerPaycheck = 5</li>
+        <li>if YearsWorked equal to or greater than 5 HrsPerPaycheck = 6</li>
+        <li>if YearsWorked equal to or greater than 10 HrsPerPaycheck = 7</li>
+        <li>SET INT TotalHrsPerYear = HrsPerPaycheck * PaychecksPerYear</li>
+        <li>SET REAL weeks = TotalHrsPerYear/40</li>
+        <li>DISPLAY "you get" weeks " weeks off a year"</li>
+        <li>END</li>
+    </ol>
+    
+    <p>How many years have you worked?</p>
+    <input type="text" id="yearsWorked" placeholder="Years Worked">
+    <button type="submit" onclick="pto2()">Submit</button>
+    <br>
+    <span id="display2"></span>
+
+    <script>
+        function pto2(){
+            var hrsPerPaycheck = 5;
+            var paychecksPerYear = 26;
+            var yearsWorked = document.getElementById("yearsWorked").value;
+            var display = document.getElementById("display2");
+
+            if (yearsWorked < 5 ){
+                var pto3 = 5
+            } else if (yearsWorked < 10){
+                var pto3 = 6
+            } else{
+                var pto3 = 7
+            };
+            var ptoPerYear = paychecksPerYear * pto3;
+            var ptoPerWeek = ptoPerYear / 40;
+            display.innerHTML = ("You get " + ptoPerYear + " per year");
+        }
+
+
+    </script>
+
+    <h1>PTO v3.0</h1>
+    <p>A simple PTO (paid time off) calculator that uses how many years you have worked to get correct PTO rate. Then uses how many weeks you have worked so far this year to calculate total PTO to date. Then deducts any PTO that you have taken to date. Results can be returned in hours or days or weeks.</p>
+    <ol>
+        <li>START</li>
+        <li>SET INT HrsPerPaycheck</li>
+        <li>SET INT PaychecksPerYear</li>
+        <li>DISPLAY "how many years have you worked?</li>
+        <li>INPUT YearsWorked</li>
+        <li>if YearsWorked less than 5 HrsPerPaycheck = 5</li>
+        <li>if YearsWorked equal to or greater than 5 HrsPerPaycheck = 6</li>
+        <li>if YearsWorked equal to or greater than 10 HrsPerPaycheck = 7</li>
+        <li>SET INT TotalHrsPerYear = HrsPerPaycheck * PaychecksPerYear</li>
+        <li>SET REAL weeks = TotalHrsPerYear/40</li>
+        <li>SET REAL days = TotalHrsPerWeek/5</li>
+        <li>SET REAL hours = TotalHrsPerDay/8</li>
+        <li>DISPLAY "you get" weeks " weeks off a year"</li>
+        <li>END</li>
+    </ol>
+
+        <p>How many years have you worked?</p>
+        <input type="text" id="ptoWorked" placeholder="Years Worked">
+        <select type="text">
+            <option value=""></option>
+        </select>
+        <button type="submit" onclick="pto3()">Submit</button>
+        <br>
+        <span id="display3"></span>
+
+        <script>
+            function pto3(){
+                var hrsPerPaycheck = 5;
+                var paychecksPerYear = 26;
+                var yearsWorked = document.getElementById("yearsWorked").value;
+                var display = document.getElementById("display3");
+
+                if (yearsWorked < 5 ){
+                    var pto3 = 5
+                } else if (yearsWorked < 10){
+                    var pto3 = 6
+                } else{
+                    var pto3 = 7
+                };
+                var ptoPerYear = paychecksPerYear * pto3;
+                var ptoPerWeek = ptoPerYear / 40;
+                var ptoPerDay = ptoPerWeek / 5;
+                var ptoPerHour = ptoPerDay / 8;
+                display.innerHTML = ("You get " + ptoPerYear + " per year<br> " + "You get " + ptoPerWeek + " per week <br>" + "You get " + ptoPerHour + " per hour ");
+            }
+        </script>
+    
+    <h1>Simple Investment Calculator</h1>
+    <p>A simple investment calculator that takes an initial investment amount in dollars. Then accepts an interest rate between 2-7%. Then takes an additional amount of money for each term of the investment. Enter a investment term(ie. how long). Then specify that the term will be in years or months. Result will be your total interest earned and the total amount in your account.</p>
+
+        <ol>
+            <li>INPUT initialInvestment</li>
+            <li>SET INT additionalInvestment</li>
+            <li>totalInvestment= initialInvestment + additionalInvestment</li>
+            <li>SET INT investmentTerm</li>
+            <li>INPUT investmentTerm</li>
+            <li>SET INT interestRate = interestRate/100</li>
+            <li>interest = interestRate * totalInvestment</li>
+            <li>finalValue = initialInvestment + interest</li>
+            <li>DISPLAY "The value of your investment is " finalValue "."</li>
+        </ol>
+
+        <p>What is your initial investment?</p>
+        <input type="text" id="initialInvestment">
+        <p>Do you have any additional investment?</p>
+        <input type="text" id="additionalInvestment">
+        <p>What is your interest rate? (Must be between 2-7%)</p>
+        <select id="rate" type="text">
+            <option value="">--Please choose an option--</option>
+            <option value=".02" >2%</option>
+            <option value=".03" >3%</option>
+            <option value=".04" >4%</option>
+            <option value=".05" >5%</option>
+            <option value=".06" >6%</option>
+            <option value=".07" >7%</option>
+        </select>
+        <p>Yearly or Monthly?</p>
+        <select type="text">
+            <option value="">--Please choose an option--</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Yearly">Yearly</option>
+        </select>
+        <button type="submit" onclick="investmentCalc()">Submit</button>
+        <br>
+        <span id="display4"></span>
+
+        <script>
+            function investmentCalc(){
+                
+                var display = document.getElementById("display4");
+
+                var initialInvestment = document.getElementById("initialInvestment").value;
+                var additionalInvestment = document.getElementById("additionalInvestment").value;
+                var rate = parseFloat(document.getElementById("rate").value);
+                var totalInvestment = initialInvestment + additionalInvestment * rate;
+                var interest = rate * totalInvestment;
+                var finalValue.toFixed(2) =  interest + totalInvestment;
+
+                display.innerHTML = "The value of your investment is " + finalValue + ".";
+            }
+        </script>
+
+</body>
+</html>
