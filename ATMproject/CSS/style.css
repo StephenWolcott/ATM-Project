@@ -1,0 +1,91 @@
+*{
+    background-color: green
+}
+
+.atm{
+    text-align: center;
+    border: 5px white;
+    
+}
+
+.atm h1{
+    font-family: 'Monoton', cursive;
+    font-size: 60px;
+    color: white;
+    text-align: center
+
+
+}
+
+.homescreen {
+    background: white;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    width: 500px;
+    height: 400px;
+    
+}
+
+.homescreen h1{
+    background: white
+}
+
+.homescreen display{
+    background: white
+}
+
+.homescreen input{
+    background: white;
+}
+
+
+.keypad {
+    padding: 10px;
+    list-style: none;
+    text-align: center
+}
+
+.keypad input {
+    float: left;
+    margin: 0 5px 5px 0;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: rgb(220,220,220);
+    border: 1px solid darkgray;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    list-style: none;
+    font-size: 30px
+}
+
+#pinScreen{
+    display: none
+}
+
+#menuScreen{
+    display: none
+}
+
+#accountScreen{
+    display: none
+}
+
+#withdrawlScreen{
+    display: none
+}
+
+#depositScreen{
+    display: none
+}
+
+#fastCashScreen{
+    display: none
+}
+
+#logOutScreen{
+    display: none
+}
+
