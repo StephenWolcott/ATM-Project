@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>ATM</title>
+    <link rel="icon" type="image/x-icon" href="Media/dollar-sign-12471/favicon.ico">
     <link rel="stylesheet" href="CSS/bootstrap.css">
     <link rel="stylesheet" href="CSS/style.css">
     <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple" rel="stylesheet">
+    <script src="JS/main.js"></script>
+    <script src='https://d3js.org/d3.v4.min.js'></script>
 
 </head>
 <body>
@@ -17,7 +21,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <h1>ATM</h1>
+                    <h2>Virtual</h2><h1>ATM</h1>
+                    
+                    <button id="beginButton" onclick="begin()">Click here to begin </button>
                 </div>
             </div>
         </div>
@@ -25,18 +31,32 @@
     <div class="screen">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <div class="homescreen">
+
+                        <!-- Welcome Screen -->
+
+                        <span id="welcomeScreen" class="welcomeScreen">
+
+                        <div id= "vid" class="video-container">
+                            <video  autoplay="autoplay" loop>
+                                <source src="Media/stocks.mp4" type="video/mp4" class"autoPlayVideo"/>
+                            </video>
+                        </div>
+
+                        </span>
                         
                         <!-- card input -->
 
                         <span id="cardScreen" >
 
-                        <div id="enterCard"></div>
+                        <div id="enterCard">Please enter your card number</div>
                         
-                        <input id="mvar" type="text" value="" name="mvar" />
+                        <br>
+
+                        <input id="mvar" type="text" name="mvar" />
                         
-                        <button id="firstbutton" onclick="cardVerify(); event.preventDefault()" >submit</button>
+                        <button onclick="cardVerify()">Submit</button>
                     
                         </span>
 
@@ -46,9 +66,9 @@
 
                         <div id="enterPin">Enter your PIN code</div>
                             
-                        <input id="mvar2" type="text" value="" name="mvar2" />
+                        <input id="mvar2" type="text" name="mvar2" />
                         
-                        <button onclick="pinVerify(); event.preventDefault()" >submit</button>
+                        <button onclick="pinVerify()" >Submit</button>
                     
                         </span>
                         
@@ -56,17 +76,19 @@
 
                         <span id="menuScreen">
 
-                        <div id="mainMenu">Welcome vauble customer! Please choose from the following options</div>
+                        <div id="mainMenu">Welcome valuable customer! Please choose from the following options:</div>
 
+                        <br>
+                        
                         <button onclick="accountView()">Account Summary </button>
 
-                        <button>Withdrawl</button>
+                        <button onclick="withdrawlView()">Withdrawl</button>
 
-                        <button>Deposit</button>
+                        <button onclick="depositView()">Deposit</button>
 
-                        <button>Fast Cash</button>
+                        <button onclick="fastCashView()">Fast Cash</button>
 
-                        <button>Log Out</button>
+                        <button onclick="logOutView()">Log Out</button>
 
                         </span>
 
@@ -74,8 +96,10 @@
 
                         <span id="accountScreen">
 
-                        <div id="balanceMessage">here is your current balance
+                        <div id="balanceMessage">Here is your current balance:
                         </div>
+
+                        <br>
 
                         <div id="accountBalance"></div>
                         
@@ -84,53 +108,97 @@
 
                         </span>
 
-                        <!-- withdrawl -->
+                        <!-- withdrawl screen -->
 
                         <span id="withdrawlScreen">
 
                         <div id="enterWithdrawl">How much would you like to withdrawl?</div>
 
-                        <input id="mvar3" type="text" value="" name="mvar3"/>
+                        <input id="mvar3" name="mvar3" placeholder="$    "/>
 
-                        <button onclick="withdrawl(); event.preventDefault()" >submit</button>
+                        <div id="error"></div>
 
-                        <button onclick="mainMenuScreen(); event.preventDefault()" >Main Menu</button>
+                        <button onclick="withdrawl()" >Submit</button>
 
-                        <button></button>
+                        <button onclick="mainMenuScreen()" >Main Menu</button>
 
+                        </span>
+
+                        <!-- Withdrawl successfull -->
+                        
+                        <span id="withdrawlSuccessScreen">
+
+                        <div id="WithdrawlSuccess">Transaction Successfull!</div>
+
+                        <div id="newWithdrawlBalance"></div>
+
+                        <div class="chart"></div>
+
+                        <button onclick="mainMenuScreen()" >Main Menu</button>
+    
                         </span>
 
                         <!-- deposit -->
 
                         <span id="depositScreen">
 
-                        <div id="enterDeposit">How much would you like to withdrawl?</div>
+                        <div id="enterDeposit">How much would you like to deposit?</div>
 
-                        <input id="mvar4" type="text" value="" name="mvar4"/>
+                        <input id="mvar4" type="text" name="mvar4" placeholder="$    "/>
 
-                        <button onclick="Deposit(); event.preventDefault()" >submit</button>
+                        <div id="errorThree"></div>
+                        <br>
 
-                        <button onclick="mainMenuScreen(); event.preventDefault()" >Main Menu</button>
+                        <button onclick="deposit()">Submit</button>
 
+                        <button onclick="mainMenuScreen()" >Main Menu</button>
+
+                        </span>
+
+                        <!-- Deposit successfull -->
+
+                        <span id="depositSuccessScreen">
+
+                        <div id="depositSuccess">Transaction Successfull!</div>
+
+                        <div id="newDepositBalance"></div>
+
+
+                        <button onclick="mainMenuScreen()">Main Menu</button>
+    
                         </span>
 
                         <!-- fast cash -->
 
                         <span id="fastCashScreen">
                         
-                        <div id="fastCashMenu">Fast Cash Menu</div>
+                        <div id="fastCashMenu">How much would you like to withdrawl?</div>
 
-                        <button onclick="fastCashOne(); event.preventDefault()" >submit</button>
+                        <button onclick="fastCashOne()" >$20</button>
 
-                        <button onclick="fastCashTwo(); event.preventDefault()" >submit</button>
+                        <button onclick="fastCashTwo()" >$40</button>
 
-                        <button onclick="fastCashThree(); event.preventDefault()" >submit</button>
+                        <button onclick="fastCashThree()" >$60</button>
 
-                        <button onclick="fastCashFour(); event.preventDefault()" >submit</button>
+                        <button onclick="fastCashFour()" >$80</button>
 
-                        <button onclick="fastCashFive(); event.preventDefault()" >submit</button>
+                        <button onclick="fastCashFive()" >$100</button>
 
-                        <button onclick="mainMenuScreen(); event.preventDefault()" >Main Menu</button>
+                        <div id="errorTwo"></div>
+
+                        <button onclick="mainMenuScreen()" >Main Menu</button>
+
+                        </span>
+
+                        <!-- Fast Cash successfull -->
+                        
+                        <span id="fastCashSuccessScreen">
+
+                        <div id="fastCashSuccess">Transaction Successfull!</div>
+
+                        <div id="newFastCashBalance"></div>
+
+                        <button onclick="mainMenuScreen()" >Main Menu</button>
 
                         </span>
 
@@ -138,14 +206,17 @@
 
                         <span id="logOutScreen">
 
-                        <div id="logOutMenu">Are you Sure You would like to end your session?</div>
+                        <div id="logOutMenu">Are you sure you would like to end your session?</div>
 
-                        <button onclick="logOut(); event.preventDefault()" >Yes</button>
+                        <div id="currentBalance"></div>
 
-                        <button onclick="mainMenuScreen(); event.preventDefault()" >No</button>
+                        <div id="cashReceived"></div>
+
+                        <button onclick="logOut()" >Yes</button>
+
+                        <button onclick="mainMenuScreen()" >No</button>
 
                         </span>
-
 
                     </div>
                 </div>
@@ -153,44 +224,44 @@
             <div class="keypad">
                 <div class="firstrow">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <form action="">
-                                <input type="button" class="fbutton" name="1" value="1" id="1" onClick=addNumber(this);addNumberTwo(this);>
-                                <input type="button" class="fbutton" name="2" value="2" id="2" onClick=addNumber(this);addNumberTwo(this);>
-                                <input type="button" class="fbutton" name="3" value="3" id="3" onClick=addNumber(this);addNumberTwo(this);>
+                                <input type="button" class="fbutton" name="1" value="1" id="1" onClick=addNumber(this);addNumberTwo(this);addNumberThree(this);addNumberFour(this)>
+                                <input type="button" class="fbutton" name="2" value="2" id="2" onClick=addNumber(this);addNumberTwo(this);addNumberThree(this);addNumberFour(this)>
+                                <input type="button" class="fbutton" name="3" value="3" id="3" onClick=addNumber(this);addNumberTwo(this);addNumberThree(this);addNumberFour(this)>
                             </form>
                         </div>
                     </div>
                 </div>
                 <div class="secondrow">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <form action="">
-                                <input type="button" class="fbutton" name="4" value="4" id="4" onClick=addNumber(this);addNumberTwo(this);>
-                                <input type="button" class="fbutton" name="5" value="5" id="5" onClick=addNumber(this);addNumberTwo(this);>
-                                <input type="button" class="fbutton" name="6" value="6" id="6" onClick=addNumber(this);addNumberTwo(this);>
+                                <input type="button" class="fbutton" name="4" value="4" id="4" onClick=addNumber(this);addNumberTwo(this);addNumberThree(this);addNumberFour(this)>
+                                <input type="button" class="fbutton" name="5" value="5" id="5" onClick=addNumber(this);addNumberTwo(this);addNumberThree(this);addNumberFour(this)>
+                                <input type="button" class="fbutton" name="6" value="6" id="6" onClick=addNumber(this);addNumberTwo(this);addNumberThree(this);addNumberFour(this)>
                             </form>
                         </div>
                     </div>
                 </div>
                 <div class="thirdrow">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <form action="">
-                                <input type="button" class="fbutton" name="7" value="7" id="7" onClick=addNumber(this);addNumberTwo(this);>
-                                <input type="button" class="fbutton" name="8" value="8" id="8" onClick=addNumber(this);addNumberTwo(this);>
-                                <input type="button" class="fbutton" name="9" value="9" id="9" onClick=addNumber(this);addNumberTwo(this);>
+                                <input type="button" class="fbutton" name="7" value="7" id="7" onClick=addNumber(this);addNumberTwo(this);addNumberThree(this);addNumberFour(this)>
+                                <input type="button" class="fbutton" name="8" value="8" id="8" onClick=addNumber(this);addNumberTwo(this);addNumberThree(this);addNumberFour(this)>
+                                <input type="button" class="fbutton" name="9" value="9" id="9" onClick=addNumber(this);addNumberTwo(this);addNumberThree(this);addNumberFour(this)>
                             </form>
                         </div>
                     </div>
                 </div>
                 <div class="fourthrow">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <form action="">
-                                <input type="button" class="fbutton" name="#" value="#" id="#" onClick=addNumber(this);addNumberTwo(this);>
-                                <input type="button" class="fbutton" name="0" value="0" id="0" onClick=addNumber(this);addNumberTwo(this);>
-                                <input type="button" class="fbutton" name="*" value="*" id="*" onClick=addNumber(this);addNumberTwo(this);>
+                                <input type="button" class="fbutton" name="#" value="#" id="#" onClick=addNumber(this);addNumberTwo(this);addNumberThree(this);addNumberFour(this)>
+                                <input type="button" class="fbutton" name="0" value="0" id="0" onClick=addNumber(this);addNumberTwo(this);addNumberThree(this);addNumberFour(this)>
+                                <input type="button" class="fbutton" name="*" value="*" id="*" onClick=addNumber(this);addNumberTwo(this);addNumberThree(this);addNumberFour(this)>
                             </form>
                         </div>
                     </div>
@@ -199,82 +270,5 @@
         </div>
     </div>
     
-    <script>
-    var aftercard = 0;
-    var card = 1;
-    var pin = 2;
-    var account = 1;
-    var balance = 1000;
-    var showCard = document.getElementById("cardScreen");
-    
-    showCard.innerHTML = "<div>welcome! please enter your card number</div>";
-    
-
-    function addNumber(element){
-        document.getElementById('mvar').value = document.getElementById('mvar').value+element.value;
-    };
-
-    function addNumberTwo(element){
-        document.getElementById('mvar2').value = document.getElementById('mvar2').value+element.value;
-    };
-
-    function cardVerify(){
-        
-        cardnumber = document.getElementById("mvar").value;
-
-        if (cardnumber == card){
-            console.log('dab')
-            
-            pinVerify();
-
-        } else {
-            cardVerify()
-        };
-    };
-
-    function pinVerify(){
-        
-        showCard.style.display = "none";
-
-        pinnumber = document.getElementById("mvar2").value;
-
-        pinScreen.style.display = "inline-block";
-
-        if (pinnumber == pin){
-            mainMenuScreen();
-
-        } else {
-            console.log(pin)
-            console.log(pinnumber)
-            console.log('nah')
-        };
-    };
-
-    function mainMenuScreen(){
-
-        pinScreen.style.display = "none";
-        enterPin.style.display = "none";
-
-        menuScreen.style.display = "inline-block";
-    };
-
-    function accountView(){
-        console.log("yeet");
-        var displaythis = document.getElementById("accountBalance");
-
-        menuScreen.style.display = "none";
-        mainMenu.style.display = "none";
-
-        accountScreen.style.display = "inline-block";
-
-        displaythis.innerHTML = "your current account balance is $" + balance + "." ;
-
-
-    };
-
-
-    </script>
-
-
 </body>
 </html>

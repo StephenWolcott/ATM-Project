@@ -1,0 +1,80 @@
+ATM PSUEDOCODE
+
+-VARIABLES:
+Card
+PIN
+Balance
+Cash
+CashReceived
+
+-FUNCTIONS:
+
+cardVerify()
+pinVerify()
+mainMenuScreen()
+accountView()
+withdrawlView()
+withdrawl()
+depositView()
+deposit()
+fastCashView()
+fastCash()
+logOutView()
+logOut()
+addNumber()
+
+-LOGIC:
+
+cardVerify()
+DISPLAY Please enter your card number
+INPUT cardnumber
+IF True
+RUN pinVerify
+ELSE
+RUN cardVerify
+
+pinVerify()
+DISPLAY Please enter your pin
+INPUT PIN number
+IF True
+RUN Main menu
+ELSE
+RUN pinVerify
+
+accountView()
+DISPLAY Balance
+
+withdrawl()
+DISPLAY Pleace choose an ammount to withdrawl
+INPUT ammount
+IF True
+DISPLAY CashReceived
+DISPLAY Balance
+ELSE
+DISPLAY Insuffiecient Funds
+
+deposit()
+DISPLAY Pleace choose an ammount to deposit
+INPUT ammount
+IF True
+DISPLAY CashDeposited
+DISPLAY Balance
+ELSE
+DISPLAY Insuffiecient Funds
+
+fastCash()
+DISPLAY Pleace choose an ammount to withdrawl
+DISPLAY Ammounts
+INPUT ammount
+IF True
+DISPLAY CashReceived
+DISPLAY Balance
+ELSE
+DISPLAY Insuffiecient Funds
+
+logOut()
+DISPLAY Are you sure you want to log out?
+IF True
+RUN cardVerify
+ELSE
+Run mainMenu
